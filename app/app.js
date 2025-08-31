@@ -1,15 +1,15 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-const box = 20; // اندازه هر خانه
-let snake = [{x: 9 * box, y: 10 * box}]; // شروع مار
+const box = 20; // size of each box
+let snake = [{x: 9 * box, y: 10 * box}]; // initial position of the snake
 let food = {
     x: Math.floor(Math.random() * 20) * box,
     y: Math.floor(Math.random() * 20) * box
 };
 let direction = "RIGHT";
 
-// کنترل‌ها
+// controllers
 document.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
     else if (event.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
@@ -17,6 +17,7 @@ document.addEventListener("keydown", (event) => {
     else if (event.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
 });
 
+// control buttons
 document.getElementById("startBtn").addEventListener("click", () => {
     location.reload(); // صفحه رو رفرش می‌کنیم برای شروع مجدد
 });
@@ -29,6 +30,15 @@ document.getElementById("pauseBtn").addEventListener("click", () => {
     } else {
         game = setInterval(draw, 150);
         document.getElementById("pauseBtn").innerText = "Pause";
+    }
+});
+
+document.getElementById("settingsBtn").addEventListener("click", () => {
+    const settings = document.getElementById("settingsPanel");
+    if (settings.style.display === "none" || !settings.style.display) {
+        settings.style.display = "block";
+    } else {
+        settings.style.display = "none";
     }
 });
 
