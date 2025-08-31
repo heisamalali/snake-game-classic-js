@@ -36,10 +36,14 @@ document.getElementById("pauseBtn").addEventListener("click", () => {
 document.getElementById("settingsBtn").addEventListener("click", () => {
     const settings = document.getElementById("settingsPanel");
     if (settings.style.display === "none" || !settings.style.display) {
-        settings.style.display = "block";
+        settings.style.display = "flex";
     } else {
         settings.style.display = "none";
     }
+});
+
+document.getElementById("closeSettingsPanelBtn").addEventListener("click", () => {
+    document.getElementById("settingsPanel").style.display = "none";
 });
 
 function draw() {

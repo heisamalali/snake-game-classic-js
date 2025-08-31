@@ -14,15 +14,16 @@ body {
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     position: relative;
-    > #settingsBtn{
+
+    > #settingsBtn {
         position: absolute;
         margin: 20px;
         top: 0;
         right: 0;
         cursor: pointer;
-        z-index: 10001;
     }
-    > #settingsPanel{
+
+    > #settingsPanel {
         display: none;
         position: absolute;
         height: 100%;
@@ -34,6 +35,39 @@ body {
         border-radius: 12px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         z-index: 1000;
+    }
+
+    > #settingsPanel {
+        display: flex;
+        flex-direction: column;
+        > .settings-panel-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        > .settings-panel-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            > .theme-selector {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                height: 50px;
+            }
+        }
+        > .settings-panel-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
     }
 }
 
