@@ -82,7 +82,21 @@ function restartGame() {
     draw();
 }
 
-
+// Helper function to get rotation angle
+function getHeadRotation(direction) {
+    switch (direction) {
+        case "UP":
+            return 0;
+        case "RIGHT":
+            return Math.PI / 2;
+        case "DOWN":
+            return Math.PI;
+        case "LEFT":
+            return -Math.PI / 2;
+        default:
+            return 0;
+    }
+}
 
 function draw() {
     // پس‌زمینه
@@ -90,21 +104,40 @@ function draw() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     const snakeHeadImg = new Image();
     snakeHeadImg.src = 'assets/snake-head.png';
+
+    const snakeBodyImg = new Image();
+    snakeBodyImg.src = 'assets/snake-body.png';
     // مار
     for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = i === 0 ? "lime" : "green";
         // fill with snake head icon instead of rect
         if (i === 0) {
-            ctx.drawImage(snakeHeadImg, snake[i].x, snake[i].y, box, box);
+            ctx.save();
+            ctx.translate(snake[i].x + box / 2, snake[i].y + box / 2);
+            ctx.rotate(getHeadRotation(direction));
+            ctx.drawImage(snakeHeadImg, -box / 2, -box / 2, box, box);
+            ctx.restore();
         } else {
-            ctx.fillStyle = "green";
-            ctx.fillRect(snake[i].x, snake[i].y, box, box);
+            // Determine orientation
+            let prev = snake[i - 1];
+            let curr = snake[i];
+            ctx.save();
+            ctx.translate(curr.x + box / 2, curr.y + box / 2);
+            if (prev.x === curr.x) {
+                // Vertical segment
+                ctx.rotate(Math.PI / 2);
+            }
+            ctx.drawImage(snakeBodyImg, -box / 2, -box / 2, box, box);
+            ctx.restore();
         }
     }
 
     // غذا
-    ctx.fillStyle = "red";
-    ctx.fillRect(food.x, food.y, box, box);
+    //ctx.fillStyle = "red";
+    //ctx.fillRect(food.x, food.y, box, box);
+    const foodImg = new Image();
+    foodImg.src = 'assets/red-apple.png';
+    ctx.drawImage(foodImg, food.x, food.y, box, box);
 
     // حرکت مار
     let headX = snake[0].x;
