@@ -15,11 +15,30 @@ document.addEventListener("keydown", (event) => {
     else if (event.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
     else if (event.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
     else if (event.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+
+    if (!game) {
+        game = setInterval(draw, speed);
+        updateSpeedDisplay();
+
+
+        setInterval(() => {
+            if (snake.length % 5 === 0 && snake.length !== 0) {
+                clearInterval(game);
+                speed = Math.max(50, 150 - (snake.length / 5) * 10);
+                game = setInterval(draw, speed);
+                updateSpeedDisplay();
+            }
+        }, 1000);
+    }
 });
 
 // control buttons
 document.getElementById("startBtn").addEventListener("click", () => {
-    location.reload(); // صفحه رو رفرش می‌کنیم برای شروع مجدد
+    restartGame();
+});
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+    restartGame();
 });
 
 document.getElementById("pauseBtn").addEventListener("click", () => {
@@ -46,15 +65,41 @@ document.getElementById("closeSettingsPanelBtn").addEventListener("click", () =>
     document.getElementById("settingsPanel").style.display = "none";
 });
 
+function restartGame() {
+    snake = [{x: 9 * box, y: 10 * box}]; // initial position of the snake
+    food = {
+        x: Math.floor(Math.random() * 20) * box,
+        y: Math.floor(Math.random() * 20) * box
+    };
+    direction = "RIGHT";
+
+    speed = 150;
+    updateSpeedDisplay();
+    document.getElementById("score").innerText = "0";
+    document.getElementById("gameOverPanel").style.display = "none";
+    if (game) clearInterval(game);
+    game = null
+    draw();
+}
+
+
+
 function draw() {
     // پس‌زمینه
     ctx.fillStyle = "#111";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+    const snakeHeadImg = new Image();
+    snakeHeadImg.src = 'assets/snake-head.png';
     // مار
     for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = i === 0 ? "lime" : "green";
-        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+        // fill with snake head icon instead of rect
+        if (i === 0) {
+            ctx.drawImage(snakeHeadImg, snake[i].x, snake[i].y, box, box);
+        } else {
+            ctx.fillStyle = "green";
+            ctx.fillRect(snake[i].x, snake[i].y, box, box);
+        }
     }
 
     // غذا
@@ -99,14 +144,18 @@ function draw() {
         headX >= canvas.width || headY >= canvas.height
     ) {
         clearInterval(game);
-        alert("Game Over 😢");
+        const gameOverPanel = document.getElementById("gameOverPanel")
+        document.getElementById("finalScore").innerText = snake.length - 1;
+        gameOverPanel.style.display = "flex";
     }
 
     // شرط برخورد با خود مار
     for (let i = 1; i < snake.length; i++) {
         if (headX === snake[i].x && headY === snake[i].y) {
             clearInterval(game);
-            alert("Game Over 😢");
+            const gameOverPanel = document.getElementById("gameOverPanel")
+            document.getElementById("finalScore").innerText = snake.length - 1;
+            gameOverPanel.style.display = "flex";
         }
     }
 
@@ -157,16 +206,5 @@ function updateSpeedDisplay() {
     }
 }
 
-// Update speed when starting the game
-updateSpeedDisplay();
-
-let game = setInterval(draw, speed);
-
-setInterval(() => {
-    if (snake.length % 5 === 0 && snake.length !== 0) {
-        clearInterval(game);
-        speed = Math.max(50, 150 - (snake.length / 5) * 10);
-        game = setInterval(draw, speed);
-        updateSpeedDisplay();
-    }
-}, 1000);
+draw();
+let game = null;
