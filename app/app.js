@@ -103,10 +103,10 @@ function draw() {
     ctx.fillStyle = "#111";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     const snakeHeadImg = new Image();
-    snakeHeadImg.src = 'assets/snake-head.png';
+    snakeHeadImg.src = 'assets/snake-head-full.png';
 
     const snakeBodyImg = new Image();
-    snakeBodyImg.src = 'assets/snake-body.png';
+    snakeBodyImg.src = 'assets/snake-body-full.png';
     // مار
     for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = i === 0 ? "lime" : "green";
