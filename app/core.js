@@ -255,8 +255,12 @@ function initializeGame() {
 }
 
 function showExistingThemes() {
-    const themePanle = document.getElementById("themePanel");
+    const container = document.getElementsByClassName("container")[0]
+    const themePanel = document.getElementById("themePanel");
+
     const themeSelect = document.getElementById("themeItems");
+    // clear existing themes
+    themeSelect.innerHTML = "";
     themes.forEach(theme => {
         const themeItemDiv = document.createElement("div");
         themeItemDiv.classList.add("theme-item")
@@ -269,7 +273,9 @@ function showExistingThemes() {
         themeItemTitleDiv.innerText = theme.name;
         themeItemDiv.append(themeItemViewDiv, themeItemTitleDiv);
         themeItemDiv.onclick = () => {
-            themePanle.style.backgroundColor = theme.backgroundColor
+            console.log(container)
+            themePanel.style.backgroundColor = theme.backgroundColor
+            container.style.backgroundColor = theme.borderColor
         };
         themeSelect.appendChild(themeItemDiv);
     });

@@ -1,4 +1,4 @@
-import { draw,restartGame, getSpeedLabel, updateSpeedDisplay } from './core.js';
+import { draw,restartGame, getSpeedLabel, updateSpeedDisplay,showExistingThemes } from './core.js';
 import { gameState} from './core.js';
 
 // controllers
@@ -23,6 +23,20 @@ document.addEventListener("keydown", (event) => {
         }, 1000);
     }
 });
+
+document.getElementById("selectThemeBtn").addEventListener("click", () => {
+    const themePanel = document.getElementById("themePanel");
+    showExistingThemes();
+    if (themePanel.style.display === "none" || !themePanel.style.display) {
+        themePanel.style.display = "flex";
+    } else {
+        themePanel.style.display = "none";
+    }
+})
+
+document.getElementById("closeThemePanelBtn").addEventListener("click", () => {
+    document.getElementById("themePanel").style.display = "none";
+})
 
 // control buttons
 document.getElementById("startBtn").addEventListener("click", () => {
