@@ -99,6 +99,51 @@ body {
             }
         }
     }
+
+    > #themePanel {
+        display: none;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        right: 0;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        flex-direction: column;
+        background-color: black;
+        align-items: center;
+        color: white;
+        .theme-panel-header {
+            padding: 10px;
+            font-weight: bold;
+        }
+        .theme-panel-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        .theme-items {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 280px;
+            gap: 40px;
+        }
+        .theme-item {
+            width: 120px;
+            height: 130px;
+            cursor: pointer;
+        }
+
+        .theme-item-view {
+            height: 120px;
+        }
+
+    }
 }
 
 canvas {

@@ -1,5 +1,5 @@
 // export this functions
-export {draw, restartGame, getSpeedLabel, updateSpeedDisplay,initializeGame};
+export {draw, restartGame, getSpeedLabel, updateSpeedDisplay, initializeGame, showExistingThemes};
 
 // size of each box
 const box = 20;
@@ -19,6 +19,46 @@ export const gameState = {
     direction: "RIGHT",
     snake: [{x: 9 * box, y: 10 * box}]
 };
+
+export const settings = {
+    sound: true,
+    music: true,
+    theme: "dark"
+};
+
+let
+themes = [
+    {
+        name:"Classic",
+        borderColor:"green",
+        backgroundColor:"#87dd87"
+    },
+    {
+        name:"Beach",
+        borderColor:"yellow",
+        backgroundColor:"#1111ff"
+    },
+    {
+        name:"Urban",
+        borderColor:"blue",
+        backgroundColor:"darkgrey"
+    },
+    {
+        name:"Retro",
+        borderColor:"#fff",
+        backgroundColor:"black"
+    },
+    {
+        name:"Velour",
+        borderColor:"darkgray",
+        backgroundColor:"saddlebrown"
+    },
+    {
+        name:"Smile",
+        borderColor:"green",
+        backgroundColor:"rebeccapurple"
+    }
+]
 // game variables
 
 const canvas = document.getElementById("game");
@@ -212,4 +252,25 @@ function initializeGame() {
         new Promise(resolve => snakeBodyImg.onload = resolve),
         new Promise(resolve => foodImg.onload = resolve)
     ])
+}
+
+function showExistingThemes() {
+    const themePanle = document.getElementById("themePanel");
+    const themeSelect = document.getElementById("themeItems");
+    themes.forEach(theme => {
+        const themeItemDiv = document.createElement("div");
+        themeItemDiv.classList.add("theme-item")
+        const themeItemViewDiv = document.createElement("div");
+        themeItemViewDiv.classList.add("theme-item-view")
+        themeItemViewDiv.style.backgroundColor = theme.backgroundColor
+        themeItemViewDiv.style.border = "10px solid " + theme.borderColor
+        const themeItemTitleDiv = document.createElement("div");
+        themeItemTitleDiv.classList.add("theme-item-title-" + theme.name.toLowerCase())
+        themeItemTitleDiv.innerText = theme.name;
+        themeItemDiv.append(themeItemViewDiv, themeItemTitleDiv);
+        themeItemDiv.onclick = () => {
+            themePanle.style.backgroundColor = theme.backgroundColor
+        };
+        themeSelect.appendChild(themeItemDiv);
+    });
 }
