@@ -1,3 +1,23 @@
+/*variable*/
+:root {
+    --theme-classic-background-color: #87dd87;
+    --theme-classic-border-color: green;
+
+    --theme-beach-background-color: #1111ff;
+    --theme-beach-border-color: yellow;
+
+    --theme-urban-background-color: darkgrey;
+    --theme-urban-border-color: blue;
+
+    --theme-retro-background-color: black;
+    --theme-retro-border-color: #fff;
+
+    --theme-velour-background-color: saddlebrown;
+    --theme-velour-border-color: darkgray;
+
+    --theme-smile-background-color: rebeccapurple;
+    --theme-smile-border-color: green;
+}
 body {
     font-family: 'Segoe UI', sans-serif;
     text-align: center;
@@ -139,8 +159,40 @@ body {
             cursor: pointer;
         }
 
-        .theme-item-view {
+        .theme-classic-item-view {
             height: 120px;
+            background-color: var(--theme-classic-background-color);
+            border: 10px solid var(--theme-classic-border-color);
+        }
+
+        .theme-beach-item-view {
+            height: 120px;
+            background-color: var(--theme-beach-background-color);
+            border: 10px solid var(--theme-beach-border-color);
+        }
+
+        .theme-urban-item-view {
+            height: 120px;
+            background-color: var(--theme-urban-background-color);
+            border: 10px solid var(--theme-urban-border-color);
+        }
+
+        .theme-retro-item-view {
+            height: 120px;
+            background-color: var(--theme-retro-background-color);
+            border: 10px solid var(--theme-retro-border-color);
+        }
+
+        .theme-velour-item-view {
+            height: 120px;
+            background-color: var(--theme-velour-background-color);
+            border: 10px solid var(--theme-velour-border-color);
+        }
+
+        .theme-smile-item-view {
+            height: 120px;
+            background-color: var(--theme-smile-background-color);
+            border: 10px solid var(--theme-smile-border-color);
         }
 
     }
@@ -169,4 +221,64 @@ canvas {
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.theme-classic {
+    background-color: var(--theme-classic-background-color);
+    canvas {
+        background-color: #87dd87;
+    }
+    #themePanel{
+        background-color: var(--theme-classic-background-color);
+    }
+}
+
+.theme-beach {
+    background-color: var(--theme-beach-background-color);
+    canvas {
+        background-color: #1111ff;
+    }
+    #themePanel{
+        background-color: var(--theme-beach-background-color);
+    }
+}
+
+.theme-urban {
+    background-color: var(--theme-urban-background-color);
+    canvas {
+        background-color: #87dd87;
+    }
+    #themePanel{
+        background-color: var(--theme-urban-background-color);
+    }
+}
+
+.theme-retro {
+    background-color: var(--theme-retro-background-color);
+    canvas {
+        background-color: #87dd87;
+    }
+    #themePanel{
+        background-color: var(--theme-retro-background-color);
+    }
+}
+
+.theme-velour {
+    background-color: var(--theme-velour-background-color);
+    canvas {
+        background-color: #87dd87;
+    }
+    #themePanel{
+        background-color: var(--theme-velour-background-color);
+    }
+}
+
+.theme-smile {
+    background-color: var(--theme-smile-background-color);
+    canvas {
+        background-color: #87dd87;
+    }
+    #themePanel{
+        background-color: var(--theme-smile-background-color);
+    }
 }
