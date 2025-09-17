@@ -27,38 +27,38 @@ export const settings = {
 };
 
 let
-themes = [
-    {
-        name:"Classic",
-        borderColor:"green",
-        backgroundColor:"#87dd87"
-    },
-    {
-        name:"Beach",
-        borderColor:"yellow",
-        backgroundColor:"#1111ff"
-    },
-    {
-        name:"Urban",
-        borderColor:"blue",
-        backgroundColor:"darkgrey"
-    },
-    {
-        name:"Retro",
-        borderColor:"#fff",
-        backgroundColor:"black"
-    },
-    {
-        name:"Velour",
-        borderColor:"darkgray",
-        backgroundColor:"saddlebrown"
-    },
-    {
-        name:"Smile",
-        borderColor:"green",
-        backgroundColor:"rebeccapurple"
-    }
-]
+    themes = [
+        {
+            name: "Classic",
+            borderColor: "green",
+            backgroundColor: "#87dd87"
+        },
+        {
+            name: "Beach",
+            borderColor: "yellow",
+            backgroundColor: "#1111ff"
+        },
+        {
+            name: "Urban",
+            borderColor: "blue",
+            backgroundColor: "darkgrey"
+        },
+        {
+            name: "Retro",
+            borderColor: "#fff",
+            backgroundColor: "black"
+        },
+        {
+            name: "Velour",
+            borderColor: "darkgray",
+            backgroundColor: "saddlebrown"
+        },
+        {
+            name: "Smile",
+            borderColor: "green",
+            backgroundColor: "rebeccapurple"
+        }
+    ]
 // game variables
 
 const canvas = document.getElementById("game");
@@ -256,7 +256,6 @@ function initializeGame() {
 
 function showExistingThemes() {
     const container = document.getElementsByClassName("container")[0]
-    const themePanel = document.getElementById("themePanel");
 
     const themeSelect = document.getElementById("themeItems");
     // clear existing themes
@@ -265,17 +264,17 @@ function showExistingThemes() {
         const themeItemDiv = document.createElement("div");
         themeItemDiv.classList.add("theme-item")
         const themeItemViewDiv = document.createElement("div");
-        themeItemViewDiv.classList.add("theme-item-view")
-        themeItemViewDiv.style.backgroundColor = theme.backgroundColor
-        themeItemViewDiv.style.border = "10px solid " + theme.borderColor
+        themeItemViewDiv.classList.add(`theme-${theme.name.toLowerCase()}-item-view`)
+
         const themeItemTitleDiv = document.createElement("div");
         themeItemTitleDiv.classList.add("theme-item-title-" + theme.name.toLowerCase())
         themeItemTitleDiv.innerText = theme.name;
         themeItemDiv.append(themeItemViewDiv, themeItemTitleDiv);
         themeItemDiv.onclick = () => {
-            console.log(container)
-            themePanel.style.backgroundColor = theme.backgroundColor
-            container.style.backgroundColor = theme.borderColor
+
+            // remove class which contain theme as part of its name and add the new theme class
+            container.className = container.className.split(" ").filter(c => !c.startsWith("theme-")).join(" ");
+            container.classList.add("theme-" + theme.name.toLowerCase());
         };
         themeSelect.appendChild(themeItemDiv);
     });
